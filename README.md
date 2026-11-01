@@ -1,178 +1,125 @@
-# FastAPI-React Stock Screener
+# 📊 MarketPulse - Full-Stack Stock Screener & Dashboard
 
-A full-stack stock screener application built using FastAPI and React that allows users to analyze and filter stocks based on predefined criteria.
+A modern, full-stack financial market dashboard built with **FastAPI**, **React**, **Chart.js**, and **Material UI (MUI)**. It provides real-time equities tracking, 30-day interactive trend charting, market velocity movers, and AI-driven quantitative stock insights with built-in caching and API protection.
 
-## 🎯 Overview
+---
 
-This project is a modern stock screening tool that combines the power of a robust Python backend with an intuitive React frontend. Users can efficiently analyze and filter stocks based on various financial metrics and criteria, making informed investment decisions easier.
+## 🌟 Key Features
+
+* **Interactive Trend Charts**: Smooth 30-day historical price visualization powered by `Chart.js` with responsive gradient fills.
+* **Real-time Fundamentals**: Key metrics including Market Cap, P/E Ratio, Dividend Yield, and 24-hour price change.
+* **Watchlist Comparison Table**: Track and compare multiple equities simultaneously with active selection.
+* **Market Movers Deck**: Live calculation of top market gainers and losers.
+* **AI & Quantitative Insights**: Fundamental investment thesis suggestions with optional Perplexity AI integration.
+* **Zero-Cost Caching Layer**: In-memory caching with 5-minute TTL to prevent hitting Yahoo Finance rate limits and drastically improve response times.
+* **API Security & Abuse Protection**: Strict CORS origin restriction and IP-based rate limiting via `slowapi`.
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Backend
-- **FastAPI** - Modern, fast web framework for building APIs with Python
-- **Python** - Server-side logic and data processing
+* **FastAPI** - High-performance Python web framework
+* **yfinance** - Real-time equity data integration
+* **Pandas & NumPy** - Data sanitization, NaN/None handling, and statistical processing
+* **slowapi** - Client IP rate-limiting
+* **Pydantic v2** - Strict request and response schemas
 
 ### Frontend
-- **React** - UI library for building interactive user interfaces
-- **JavaScript** - Client-side logic and interactivity
-- **HTML/CSS** - Markup and styling
-
-### Architecture
-```
-fastapi-react-stock-screener/
-├── backend/          # FastAPI application
-│   ├── app/
-│   ├── requirements.txt
-│   └── ...
-├── frontend/         # React application
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── ...
-└── README.md
-```
-
-## ✨ Features
-
-- **Stock Filtering** - Filter stocks based on predefined financial criteria
-- **Real-time Analysis** - Analyze stock data with up-to-date information
-- **Interactive Dashboard** - User-friendly interface for stock screening
-- **RESTful API** - Well-documented API endpoints for stock data operations
-- **Responsive Design** - Works seamlessly on desktop and mobile devices
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Python 3.8+ (for backend)
-- Node.js 14+ and npm (for frontend)
-- Git
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-```bash
-cd backend
-```
-
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Run the FastAPI server:
-```bash
-uvicorn app.main:app --reload
-```
-
-The API will be available at `http://localhost:8000`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-The application will open at `http://localhost:3000`
-
-## 📚 API Documentation
-
-Once the FastAPI backend is running, interactive API documentation is available at:
-- **Swagger UI**: `http://localhost:8000/docs`
-- **ReDoc**: `http://localhost:8000/redoc`
-
-## 🔧 Configuration
-
-### Backend Configuration
-- Update `.env` file in the backend directory with your configuration
-- Configure database connections, API keys, and other settings as needed
-
-### Frontend Configuration
-- Update environment variables in `frontend/.env`
-- Configure API base URL and other client-side settings
-
-## 📖 Usage
-
-1. Start both the backend and frontend servers following the setup instructions
-2. Open your browser and navigate to `http://localhost:3000`
-3. Use the dashboard to:
-   - View available stocks
-   - Apply filters based on financial criteria
-   - Analyze stock performance
-   - Export or save screening results
-
-## 🧪 Testing
-
-### Backend Tests
-```bash
-cd backend
-pytest
-```
-
-### Frontend Tests
-```bash
-cd frontend
-npm test
-```
-
-## 🔒 Security Considerations
-
-- Never commit sensitive information like API keys or database credentials
-- Use environment variables for all sensitive configuration
-- Implement proper authentication and authorization on API endpoints
-- Validate and sanitize all user inputs
-
-## 📦 Deployment
-
-### Backend Deployment
-- Deploy FastAPI app using services like Heroku, AWS, or DigitalOcean
-- Use a production ASGI server like Gunicorn with Uvicorn workers
-- Set appropriate environment variables for production
-
-### Frontend Deployment
-- Build the React app: `npm run build`
-- Deploy to services like Vercel, Netlify, or GitHub Pages
-- Configure API endpoint to point to production backend
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙋 Support
-
-For issues, questions, or suggestions, please open an issue on the [GitHub repository](https://github.com/VanshKhurana-hub/fastapi-react-stock-screener).
-
-## 📌 Project Status
-
-This project is actively maintained and open to contributions.
+* **React 19** - Component-based user interface
+* **Material UI (MUI v7)** - Modern financial dashboard design system
+* **Chart.js & react-chartjs-2** - Canvas-based financial time-series charting
+* **Axios** - HTTP client for API communication
 
 ---
 
-**Built with ❤️ by [VanshKhurana-hub](https://github.com/VanshKhurana-hub)**
+## 📁 Project Architecture
+
+```text
+fastapi-react-stock-screener/
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # Automated CI for Python syntax & React build
+├── backend/
+│   ├── main.py                  # FastAPI app factory, CORS & Rate Limiter
+│   ├── services.py              # yfinance fetching, 5-min caching & math sanitization
+│   ├── schemas.py               # Pydantic models for stock & market data
+│   ├── .env                     # Local environment settings (git-ignored)
+│   ├── .env.example             # Template for environment settings
+│   └── requirements.txt         # Pinned backend dependencies
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx           # Top branding bar with live market indicator
+│   │   ├── StockSearch.js       # Search bar with popular ticker quick-chips
+│   │   ├── StockChart.jsx       # Interactive 30-day Chart.js line chart
+│   │   ├── StockTable.js        # Multi-stock watchlist and comparison table
+│   │   ├── TopMovers.jsx        # Gainers & losers cards with 1-click chart select
+│   │   └── StockAdvisor.js      # Fundamental and AI equity insights
+│   ├── utils/
+│   │   └── formatters.js        # Currency ($), percentage (%), and market cap formatters
+│   ├── theme.js                 # Custom financial dashboard MUI theme
+│   ├── App.js                   # Main application view & state manager
+│   └── index.js
+├── main.py                      # Root proxy to backend/main.py
+├── package.json
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+* **Python 3.10+**
+* **Node.js 18+ and npm**
+
+---
+
+### 2. Backend Setup
+
+1. **Install Python dependencies**:
+   ```bash
+   pip install -r backend/requirements.txt
+   ```
+
+2. **Configure environment variables (optional)**:
+   A `backend/.env` file is included by default:
+   ```env
+   FRONTEND_URL=http://localhost:3000,http://127.0.0.1:3000
+   RATE_LIMIT_STOCK=20/minute
+   RATE_LIMIT_MOVERS=10/minute
+   PERPLEXITY_API_KEY=
+   ```
+
+3. **Start the FastAPI backend server**:
+   ```bash
+   uvicorn main:app --reload
+   ```
+   * **API Base URL**: `http://127.0.0.1:8000`
+   * **Swagger Interactive Docs**: `http://127.0.0.1:8000/docs`
+
+---
+
+### 3. Frontend Setup
+
+1. **Install Node dependencies** (if not already installed):
+   ```bash
+   npm install
+   ```
+
+2. **Start the React development server**:
+   ```bash
+   npm start
+   ```
+   * The app will automatically open at **`http://localhost:3000`**.
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description | Rate Limit |
+|---|---|---|---|
+| `GET` | `/` | API status and health check | None |
+| `GET` | `/stock/{ticker}` | Returns real-time fundamentals and 30-day price history | 20 / minute |
+| `GET` | `/top-movers` | Returns top gainers and losers across mega-cap equities | 10 / minute |
+| `GET` | `/stock-advice` | Returns AI or quantitative investment insights | 5 / minute |
